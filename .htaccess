@@ -1,0 +1,44 @@
+RewriteEngine On
+
+# Force HTTPS and remove 'www' from domain
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+# Redirect specific pages (only the one you want)
+RewriteRule ^custom-website-developement/?$ https://www.esystemsolutions.net/custom-website-development [R=301,L]
+
+# Force contact-us.php → contact-us
+RewriteCond %{THE_REQUEST} \s/contact-us\.php[\s?]
+RewriteRule ^contact-us\.php$ /contact-us [R=301,L]
+
+# Internally rewrite /contact-us → contact-us.php (show pretty URL)
+RewriteRule ^contact-us/?$ contact-us.php [L]
+
+# Remove .php extension from other files (but skip email.php)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/email\.php$
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Redirect "/file.php" to "/file" (except for email.php and contact-us.php)
+RewriteCond %{REQUEST_URI} !^/(email|contact-us)\.php$
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^/]+)\.php
+RewriteRule ^/?(.*)\.php$ /$1 [L,R=301]
+
+# Internally forward "/file" to "/file.php"
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^/?(.*)$ $1.php [L]
+
+# Handle mod_security
+<IfModule mod_security.c>
+  SecFilterEngine Off
+  SecFilterScanPOST Off
+</IfModule>
+
+# PHP Handler
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php81___lsphp .php .php8 .phtml
+</IfModule>
