@@ -9,7 +9,7 @@ $to = 'info@bookauthorworld.com, ayanmujahid1234@gmail.com, masoodum123@gmail.co
 $from = "leads@bookauthorworld.com";
 
 // Database Connection
-$con = mysqli_connect("localhost", "nohfilco_bookauthorworld", "@Dm!n0307", "nohfilco_bookauthorworld");
+$con = mysqli_connect("localhost", "designatrix_bookauthorworld", "@Dm!n0307", "designatrix_bookauthorworld");
 if (!$con) {
     die("Database connection failed: " . mysqli_connect_error());
 }
