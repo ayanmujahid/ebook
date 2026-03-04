@@ -130,7 +130,7 @@
                     <ul class="flex flex-col gap-y-2">
                         <li>
                             <a class="text-[#000] text-[16px] light block" href="javascript:;">
-                                720 South Colorado Boulevard Glendale, Penthouse North, Denver, CO, 80246 </a>
+                                5900 balcones Drive # 22234 Austin, TX 78731 </a>
                         </li>
                         <li>
                             <a class="text-[#000] text-[16px] light block" href="mailto:support@bookauthorworld.com">
